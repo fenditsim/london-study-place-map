@@ -175,16 +175,26 @@
                 }
                 if (currentCell || currentRow.length > 0) { currentRow.push(currentCell.trim()); rows.push(currentRow); }
 
-                return rows.slice(1).map(cells => ({
-                    name: cells[0] || "",
-                    address: cells[1] || "",
-                    borough: cells[2] || "",
-                    lat: parseFloat(cells[3]),
-                    lng: parseFloat(cells[4]),
-                    pros: (cells[5] || "").split(/\r?\n/).map(p => p.replace(/^- /, '').trim()).filter(p => p),
-                    cons: (cells[6] || "").split(/\r?\n/).map(c => c.replace(/^- /, '').trim()).filter(c => c),
-                    type: (cells[0] || "").toLowerCase().includes('nero') || (cells[0] || "").toLowerCase().includes('pret') ? "Chain" : "Local Spot"
-                })).filter(item => !isNaN(item.lat) && !isNaN(item.lng));
+                return rows.slice(1).map(cells => {
+                    const name = cells[0] || "";
+                    const nameLower = name.toLowerCase();
+                    // Updated: Recognize Starbucks, Costa, Nero, and Pret as Chains
+                    const isChain = nameLower.includes('nero') || 
+                                    nameLower.includes('pret') || 
+                                    nameLower.includes('starbucks') || 
+                                    nameLower.includes('costa');
+
+                    return {
+                        name: name,
+                        address: cells[1] || "",
+                        borough: cells[2] || "",
+                        lat: parseFloat(cells[3]),
+                        lng: parseFloat(cells[4]),
+                        pros: (cells[5] || "").split(/\r?\n/).map(p => p.replace(/^- /, '').trim()).filter(p => p),
+                        cons: (cells[6] || "").split(/\r?\n/).map(c => c.replace(/^- /, '').trim()).filter(c => c),
+                        type: isChain ? "Chain" : "Local Spot"
+                    };
+                }).filter(item => !isNaN(item.lat) && !isNaN(item.lng));
             };
 
             const renderGeoJson = (data) => {
