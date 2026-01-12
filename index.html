@@ -239,7 +239,7 @@
                 const loadAssets = async () => {
                     setLoading(true);
                     try {
-                        const csvRes = await fetch('public/london%20cafes%20and%20co-working%20space%20-%20Sheet1(1).csv');
+                        const csvRes = await fetch('public/london%20cafes%20and%20co-working%20space.csv');
                         if (csvRes.ok) {
                             const text = await csvRes.text();
                             setCafeData(parseCSV(text));
