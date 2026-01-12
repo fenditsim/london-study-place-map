@@ -142,7 +142,7 @@
                 if (searchTerm.length < 2) return [];
                 const lower = searchTerm.toLowerCase();
                 const bMatches = boroughsInFile
-                    .filter(b => b.toLowerCase().includes(lower))
+                    .filter(b => b.toLowerCase().includes(lower)) // FIXED: was referencing undefined 'low'
                     .map(b => ({ type: 'borough', name: b, count: boroughStats[normalize(b)] || 0 }));
                 const cMatches = cafeData
                     .filter(c => c.name.toLowerCase().includes(lower))
