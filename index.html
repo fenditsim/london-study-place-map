@@ -178,7 +178,7 @@
                 return rows.slice(1).map(cells => {
                     const name = cells[0] || "";
                     const nameLower = name.toLowerCase();
-                    // Updated: Recognize Starbucks, Costa, Nero, and Pret as Chains
+                    // Recognition of major chains
                     const isChain = nameLower.includes('nero') || 
                                     nameLower.includes('pret') || 
                                     nameLower.includes('starbucks') || 
@@ -364,7 +364,7 @@
                                     <button key={idx} onClick={() => s.type === 'borough' ? handleBoroughSelect(s.name) : handleSpotSelect(s.data, true)}
                                         className="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-50 text-left border-b border-slate-100 last:border-0 group">
                                         <div className="flex items-center gap-3">
-                                            {s.type === 'borough' ? <Globe className="text-indigo-500" size={18} /> : <MapPin className="text-orange-600" size={18} />}
+                                            {s.type === 'borough' ? <Globe className="text-orange-500" size={18} /> : <MapPin className="text-orange-600" size={18} />}
                                             <div>
                                                 <div className="text-sm font-black text-slate-800">{s.name}</div>
                                                 <div className="text-[9px] text-slate-400 uppercase tracking-widest font-black">{s.type}</div>
@@ -413,7 +413,7 @@
                                         <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedSpot.address)}`} 
                                            target="_blank" 
                                            rel="noopener noreferrer" 
-                                           className="flex items-center gap-2 text-sm text-slate-500 hover:text-indigo-600 transition-colors group inline-flex"
+                                           className="flex items-center gap-2 text-sm text-slate-500 hover:text-orange-600 transition-colors group inline-flex"
                                         >
                                             <Navigation size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                             <span className="underline decoration-slate-300 underline-offset-[10px]">{selectedSpot.address}</span>
