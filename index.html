@@ -134,7 +134,6 @@
                 const names = new Set();
                 geoJsonLayerRef.current.eachLayer(l => {
                     const props = l.feature.properties;
-                    // Check various common LAD/Name property keys
                     const n = props.LAD24NM || props.LAD23NM || props.name || props.NAME || props.BOROUGH;
                     if (n) names.add(n);
                 });
@@ -204,7 +203,7 @@
                 setDataLoaded(prev => prev + 1);
             };
 
-            // Dynamic Styling Effect for Boroughs - Orange Accent with robust matching
+            // Dynamic Styling Effect for Boroughs - Orange Accent
             useEffect(() => {
                 if (geoJsonLayerRef.current && mapRef.current) {
                     geoJsonLayerRef.current.setStyle((f) => {
@@ -371,12 +370,12 @@
                             {showLinker && (
                                 <div className="w-full md:w-80 bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl border border-slate-200 p-6 pointer-events-auto animate-up">
                                     <div className="flex justify-between items-center mb-6">
-                                        <h3 className="font-black text-slate-900 flex items-center gap-2 uppercase text-[10px] tracking-[0.2em]"><Layers size={18} className="text-indigo-600" /> Layer Visuals</h3>
+                                        <h3 className="font-black text-slate-900 flex items-center gap-2 uppercase text-[10px] tracking-[0.2em]"><Layers size={18} className="text-orange-600" /> Layer Visuals</h3>
                                         <button onClick={() => setShowLinker(false)} className="text-slate-400 hover:text-slate-600"><X size={20} /></button>
                                     </div>
                                     <div className="grid grid-cols-2 gap-2">
                                         {Object.entries(MAP_STYLES).map(([key, style]) => (
-                                            <button key={key} onClick={() => setMapStyle(key)} className={`px-3 py-2.5 rounded-xl text-[10px] font-black border transition-all uppercase ${mapStyle === key ? 'bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-200' : 'bg-slate-50 text-slate-600 border-slate-200'}`}>
+                                            <button key={key} onClick={() => setMapStyle(key)} className={`px-3 py-2.5 rounded-xl text-[10px] font-black border transition-all uppercase ${mapStyle === key ? 'bg-orange-600 text-white border-orange-600 shadow-md shadow-orange-200' : 'bg-slate-50 text-slate-600 border-slate-200'}`}>
                                                 {style.name}
                                             </button>
                                         ))}
@@ -438,7 +437,7 @@
                         </div>
 
                         <div className="w-full max-w-xl bg-white/90 backdrop-blur-2xl border border-slate-200 rounded-[2.5rem] shadow-2xl flex items-center p-2.5 pointer-events-auto transition-all">
-                            <button onClick={() => { setShowLinker(!showLinker); setShowDetails(false); }} className={`p-4 rounded-full transition-all ${showLinker ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-200' : 'text-slate-400 hover:bg-slate-50'}`}>
+                            <button onClick={() => { setShowLinker(!showLinker); setShowDetails(false); }} className={`p-4 rounded-full transition-all ${showLinker ? 'bg-orange-600 text-white shadow-xl shadow-orange-200' : 'text-slate-400 hover:bg-slate-50'}`}>
                                 {showLinker ? <ChevronDown size={22} /> : <Palette size={22} />}
                             </button>
                             <div className="flex-1 relative flex items-center px-3">
