@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>London Study Spot Explorer</title>
+    <!-- Tab Logo (Favicon) - Orange Pin -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ea580c'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3' fill='white'/%3E%3C/svg%3E">
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React and ReactDOM -->
@@ -136,7 +138,6 @@
                 return Array.from(names).sort();
             }, [dataLoaded]);
 
-            // FIXED: Variable mismatch 'low' to 'lower' to prevent screen blanking/crash
             const searchSuggestions = useMemo(() => {
                 if (searchTerm.length < 2) return [];
                 const lower = searchTerm.toLowerCase();
@@ -244,7 +245,6 @@
                 const loadAssets = async () => {
                     setLoading(true);
                     try {
-                        // UPDATED: Filename matches user's uploaded file
                         const csvRes = await fetch('public/london%20cafes%20and%20co-working%20space.csv');
                         if (csvRes.ok) {
                             const text = await csvRes.text();
@@ -377,7 +377,10 @@
                             {showLinker && (
                                 <div className="w-full md:w-80 bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl border border-slate-200 p-6 pointer-events-auto animate-up">
                                     <div className="flex justify-between items-center mb-6">
-                                        <h3 className="font-black text-slate-900 flex items-center gap-2 uppercase text-[10px] tracking-[0.2em]"><Layers size={18} className="text-orange-600" /> Layer Visuals</h3>
+                                        <div className="flex flex-col gap-1">
+                                            <h3 className="font-black text-slate-900 flex items-center gap-2 uppercase text-[10px] tracking-[0.2em]"><Layers size={18} className="text-orange-600" /> Layer Visuals</h3>
+                                            <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest italic">Updated: Jan 12, 2026 — 18:16 GMT</span>
+                                        </div>
                                         <button onClick={() => setShowLinker(false)} className="text-slate-400 hover:text-slate-600"><X size={20} /></button>
                                     </div>
                                     <div className="grid grid-cols-2 gap-2">
