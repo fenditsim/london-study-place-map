@@ -140,6 +140,7 @@
                 return Array.from(names).sort();
             }, [dataLoaded]);
 
+            // FIXED: Changed variable mismatch 'low' to 'lower' to prevent screen blanking/crash
             const searchSuggestions = useMemo(() => {
                 if (searchTerm.length < 2) return [];
                 const lower = searchTerm.toLowerCase();
@@ -178,7 +179,6 @@
                 return rows.slice(1).map(cells => {
                     const name = cells[0] || "";
                     const nameLower = name.toLowerCase();
-                    // Recognition of major chains
                     const isChain = nameLower.includes('nero') || 
                                     nameLower.includes('pret') || 
                                     nameLower.includes('starbucks') || 
