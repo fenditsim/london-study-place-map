@@ -142,7 +142,7 @@
                 if (searchTerm.length < 2) return [];
                 const lower = searchTerm.toLowerCase();
                 const bMatches = boroughsInFile
-                    .filter(b => b.toLowerCase().includes(lower)) // FIXED: was referencing undefined 'low'
+                    .filter(b => b.toLowerCase().includes(lower)) // FIXED: properly uses 'lower' now
                     .map(b => ({ type: 'borough', name: b, count: boroughStats[normalize(b)] || 0 }));
                 const cMatches = cafeData
                     .filter(c => c.name.toLowerCase().includes(lower))
@@ -379,7 +379,7 @@
                                     <div className="flex justify-between items-center mb-6">
                                         <div className="flex flex-col gap-1">
                                             <h3 className="font-black text-slate-900 flex items-center gap-2 uppercase text-[10px] tracking-[0.2em]"><Layers size={18} className="text-orange-600" /> Layer Visuals</h3>
-                                            <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest italic">Updated: Jan 12, 2026 — 18:16 GMT</span>
+                                            <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest italic">Updated: Jan 12, 2026 — 18:22 GMT</span>
                                         </div>
                                         <button onClick={() => setShowLinker(false)} className="text-slate-400 hover:text-slate-600"><X size={20} /></button>
                                     </div>
