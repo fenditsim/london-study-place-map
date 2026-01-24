@@ -275,7 +275,8 @@
                 const map = L.map('map-container', { 
                     zoomControl: false, 
                     attributionControl: false,
-                    tap: false 
+                    tap: false,
+                    minZoom: 6 // Set minimum zoom to stay focused on UK area rather than whole world
                 }).setView([51.5074, -0.1278], 11);
                 
                 tileLayerRef.current = L.tileLayer(MAP_STYLES.original.url, { maxZoom: 19, attribution: MAP_STYLES.original.attr }).addTo(map);
