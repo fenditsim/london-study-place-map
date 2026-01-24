@@ -176,10 +176,15 @@
                 return rows.slice(1).map(cells => {
                     const name = cells[0] || "";
                     const nameLower = name.toLowerCase();
-                    const isChain = nameLower.includes('nero') || 
-                                    nameLower.includes('pret') || 
-                                    nameLower.includes('starbucks') || 
-                                    nameLower.includes('costa');
+                    
+                    // Expanded chain recognition logic
+                    const chainKeywords = [
+                        'nero', 'pret', 'starbucks', 'costa', 
+                        'blank street', 'hoxton', 'roasting plant',
+                        'gail\'s', 'black sheep', 'joe & the juice'
+                    ];
+                    
+                    const isChain = chainKeywords.some(keyword => nameLower.includes(keyword));
 
                     return {
                         name: name,
@@ -346,7 +351,6 @@
             // Dynamic date helper to detect when the file was last updated on the server
             const lastUpdatedString = useMemo(() => {
                 const date = new Date(document.lastModified);
-                // Return formatted date: Jan 12, 2026 — 18:39 GMT
                 return date.toLocaleString('en-GB', { 
                     day: '2-digit', 
                     month: 'short', 
@@ -486,4 +490,4 @@
         root.render(<App />);
     </script>
 </body>
-</html>
+</html> eof
