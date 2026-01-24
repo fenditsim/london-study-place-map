@@ -343,6 +343,20 @@
                 if (mapRef.current) mapRef.current.setView([51.5074, -0.1278], 11);
             };
 
+            // Dynamic date helper to detect when the file was last updated on the server
+            const lastUpdatedString = useMemo(() => {
+                const date = new Date(document.lastModified);
+                // Return formatted date: Jan 12, 2026 — 18:39 GMT
+                return date.toLocaleString('en-GB', { 
+                    day: '2-digit', 
+                    month: 'short', 
+                    year: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    timeZoneName: 'short'
+                }).replace(',', ' —');
+            }, [dataLoaded]);
+
             return (
                 <div className="relative w-full h-full font-sans select-none overflow-hidden bg-slate-100">
                     <div id="map-container" className="absolute inset-0 z-0" />
@@ -387,8 +401,8 @@
                                             </button>
                                         ))}
                                     </div>
-                                    <div className="flex flex-col gap-1">
-                                        <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest italic">Updated: Jan 15, 2026 — 07:14 GMT</span>
+                                    <div className="flex flex-col gap-1 border-t border-slate-100 pt-4">
+                                        <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest italic">Updated: {lastUpdatedString}</span>
                                         <span className="text-[8px] font-black text-orange-600 uppercase tracking-[0.2em]">By Palpatine Fendi</span>
                                     </div>
                                 </div>
